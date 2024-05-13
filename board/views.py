@@ -24,10 +24,19 @@ def read(request, id):
 
 def regist(request):
     if request.method == 'POST' :
-        title = request.POST['title']
+        title = request.POST.get('title')
         writer = request.POST.get('writer')
-        content = request.POST['content']
-        Board(title=title, writer=writer, content=content).save()
+        content = request.POST.get('content')
+        startdate = request.POST.get('startdate')
+        enddate = request.POST.get('enddate')
+        payment = request.POST.get('payment')
+        zonecode = request.POST.get('zonecode')
+        roadAddress = request.POST.get('roadAddress')
+        roadAddressDetail = request.POST.get('roadAddressDetail')
+
+        Board(title=title, writer=writer, content=content, startdate=startdate,
+              enddate=enddate, payment=payment, zonecode=zonecode, 
+              roadAddress=roadAddress, roadAddressDetail=roadAddressDetail).save()
         return redirect(reverse('board:list'))
     else:
         return render(request, 'board/regist.html')
@@ -35,9 +44,15 @@ def regist(request):
 def edit(request, id):
     board = Board.objects.get(pk=id)
     if request.method == 'POST':
-        board.title = request.POST['title']
-        board.writer = request.POST['writer']
-        board.content = request.POST['content']
+        board.title = request.POST.get('title')
+        board.writer = request.POST.get('writer')
+        board.content = request.POST.get('content')
+        board.startdate = request.POST.get('startdate')
+        board.enddate = request.POST.get('enddate')
+        board.payment = request.POST.get('payment')
+        board.zonecode = request.POST.get('zonecode')
+        board.roadAddress = request.POST.get('roadAddress')
+        board.roadAddressDetail = request.POST.get('roadAddressDetail')
         board.save()
         return redirect(reverse('board:read', args=(id,)))
     else:
