@@ -7,6 +7,7 @@
 <a href="{% url 'board:list_wash' %}"><button>목욕</button></a>
 <a href="{% url 'board:list_grooming' %}"><button>미용</button></a>
 
+
 {% if board_list %}
     <table border="1">
         <tr>
@@ -17,14 +18,14 @@
         </tr>
     
     {% for board in board_list %}
-       
+    {% if board.type == "미용" %}
         <tr>
             <td>{{board.id}}</td>
             <td><a href="{% url 'board:read' board.id %}">{{board.title}}</a></td>
             <td>{{board.writer}}</td>
             <td>{{board.readcount}}</td>
         </tr>
-        
+    {% endif %}
     {% endfor %}
     
     </table>

@@ -1,13 +1,27 @@
 {% extends 'board/base.html' %}
 {% block title %}등록{% endblock %}
 {% block content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
 <table border="1">
     <tr>
         <th>Title</th>
         <td>
             <input type="text" name="title" required>
+        </td>
+    </tr>
+    <tr>
+      <th>Type</th>
+      <td>
+          <input type="radio" name="type" value="산책"> 산책 <br>
+          <input type="radio" name="type" value="목욕"> 목욕 <br>
+          <input type="radio" name="type" value="미용"> 미용 <br>
+      </td>
+    </tr>
+    <tr>
+        <th>Img</th>
+        <td>
+            <input type="file" name="imgfile" id="imgfile">
         </td>
     </tr>
     <tr>

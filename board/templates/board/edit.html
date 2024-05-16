@@ -1,7 +1,7 @@
 {% extends 'board/base.html' %}
 {% block title %}수정{% endblock %}
 {% block content %}
-<form method="post">
+<form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     <input type="hidden" name="writer" value="{{board.writer}}">
 <table border="1">
@@ -11,6 +11,20 @@
             <input type="text" name="title" value="{{board.title}}" required>
         </td>
     </tr>
+    <tr>
+      <th>Type</th>
+      <td>
+          <input type="radio" name="type" value="산책"> 산책 <br>
+          <input type="radio" name="type" value="목욕"> 목욕 <br>
+          <input type="radio" name="type" value="미용"> 미용 <br>
+      </td>
+    </tr>
+    <tr>
+        <th>Img</th>
+        <td>
+            <input type="file" name="imgfile" id="imgfile">
+        </td>
+  </tr>
     <tr>
         <th>Writer</th>
         <td>

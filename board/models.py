@@ -5,6 +5,7 @@ from django.utils import timezone
 
 class Board(models.Model):
     title = models.CharField(max_length=50)
+    type = models.CharField(max_length=50,default=0)
     writer = models.CharField(max_length=30)
     content = models.TextField()
     regdate = models.DateTimeField(auto_now=timezone.now)
@@ -15,9 +16,11 @@ class Board(models.Model):
     zonecode = models.CharField(null=True,max_length=30,default=0)
     roadAddress = models.CharField(null=True,max_length=30,default=0)
     roadAddressDetail = models.CharField(null=True,max_length=30,default=0)
+    imgfile = models.ImageField(null=True, upload_to="", blank=True) # 이미지 컬럼 추가
 
     def _str_(self):
         return '%s. %s(%d)' % (self.title, self.writer, self.readcount)
     def UpReadCount(self):
         self.readcount += 1
         self.save()
+
